@@ -7,17 +7,48 @@ from PIL import Image
 
 
 
-st.title('SMART LIGHT')
+st.title('SMART COMPTEL')
 
-st.write("An SME that aims to illuminate the planet with solar panels!")
-image = Image.open('sme_panels.jpg')
-st.image(image, use_column_width="auto")
+st.write("A group of computer companies bidding for contracts")
+image = Image.open('sme_sales.jpg')
+st.image(image,use_column_width="auto")
 
 with st.expander("Read More..."):
-                 st.write('A SME Company called SMART LIGHT specialized in selling panels possesses 5 subsidiaries across two continent namely in the cities New York, Los Angeles, London, Paris and Munich. These cities are internally referenced by thier codes C001,....C005, respectively. At the end of each quater, a subsidiary should communicate to the headquater the ammounts of sales and costs done during the quater, however, monthly detailed. Based on the communicated data, the head quaters wants to produce a quaterly that should entail statistics related to sales and profits done either individually or globally. These statistics should be helpful for eveluating the activities of each subsidiary and in making business decisions by the direction.')
+                 st.write('The datasets includes group of companies who sells computers and  other computers services..The datatset contains the number of contract bids from each company and the quantity of products sold for each bid.')
 
-sme_sales=pd.read_csv('sme.csv')
-
+sme_sales=pd.read_excel('sales.xlsx')
 
 data_sme= pd.DataFrame(sme_sales)
-st.table(data_sme)
+st.dataframe(data_sme)
+
+ #we need another colum to calculate the ammount of each sales rep
+st.text('Lets calculate the cost of each products')
+data_sme["Cost"] =data_sme["Quantity"]*data_sme["Price"]
+st.dataframe([data_sme['Quantity'],data_sme['Price'],data_sme['Cost']])
+
+st.text('Which product sold more or less?') 
+prod_sme =data_sme.groupby('Product')['Quantity'].count()
+st.dataframe(prod_sme)                            
+st.bar_chart(prod_sme, width=150, height=300) 
+st.write('CPU has the highest number of  sought out product while monitor is the least')
+
+st.text('Which company got more contract bids?') 
+sales_rep=data_sme['Name'].value_counts()
+st.dataframe(sales_rep)
+st.bar_chart(sales_rep)
+st.text('Trantow barrows had more contract bids!')
+
+st.text('Which of the companies won a contract?')
+sme_won = data_sme['Status'] == 'won'
+st.dataframe(data_sme[sme_won])
+
+
+
+
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
