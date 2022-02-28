@@ -18,7 +18,7 @@ st.image(image,use_column_width="auto")
 with st.expander("Read More..."):
                  st.write('The datasets includes group of companies who sells computers and  other computers services..The datatset contains the number of contract bids from each company and the quantity of products sold for each bid.')
 
-sme_sales=pd.read_excel('sales.xlsx',sheet_name='Sheet1')
+sme_sales=pd.read_csv('sales.csv')
 
 data_sme= pd.DataFrame(sme_sales)
 st.dataframe(data_sme)
