@@ -18,7 +18,7 @@ st.image(image,use_column_width="auto")
 with st.expander("Read More..."):
                  st.write('The datasets includes group of companies who sells computers and  other computers services..The datatset contains the number of contract bids from each company and the quantity of products sold for each bid.')
 
-sme_sales=pd.read_csv('sales.csv')
+sme_sales=pd.read_csv('sales_comp.csv')
 
 data_sme= pd.DataFrame(sme_sales)
 st.dataframe(data_sme)
@@ -43,8 +43,6 @@ st.text('Trantow barrows had more contract bids!')
 st.text('Which of the companies won a contract?')
 sme_won = data_sme['Status'] == 'won'
 st.dataframe(data_sme[sme_won])
-
-
 
 
 
