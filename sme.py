@@ -1,6 +1,8 @@
 import streamlit as st
 import time
 import pandas as pd
+#import openpyxl
+#from openpyxl import Workbook
 #mport matplotlib.pyplot as plt
 from PIL import Image
 
@@ -16,7 +18,7 @@ st.image(image,use_column_width="auto")
 with st.expander("Read More..."):
                  st.write('The datasets includes group of companies who sells computers and  other computers services..The datatset contains the number of contract bids from each company and the quantity of products sold for each bid.')
 
-sme_sales=pd.read_excel('sales.xlsx')
+sme_sales=pd.read_excel('sales.xlsx',sheet_name='Sheet1')
 
 data_sme= pd.DataFrame(sme_sales)
 st.dataframe(data_sme)
@@ -46,10 +48,10 @@ st.dataframe(data_sme[sme_won])
 
 
 
-hide_streamlit= """
+hide_streamlit_style = """
             <style>
-            #MainMenu :{visibility:hidden;}
-            footer: {visibility:hidden;}
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
             </style>
             """
-st.markdown(hide_streamlit,unsafe_allow_html=True)
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
